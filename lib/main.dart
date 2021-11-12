@@ -30,15 +30,24 @@ class _PerguntaAppState extends State<PerguntaApp> {
         'respostas': ['Echo', 'Pedro', 'Thiago', 'João']
       }
     ];
+
+    List<Widget> respostas = [];
+
+    for (String textoResp
+        in perguntas[_perguntaSelecionada].cast()['respostas']) {
+      respostas.add(Resposta(textoResp, _responder));
+    }
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Perguntas')),
         body: Column(
           children: <Widget>[
+            //map = index and value
             Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
-            Resposta('Resposta 1', _responder),
-            Resposta('Resposta 2', _responder),
-            Resposta('Resposta 3', _responder),
+            /**
+             * "..."" is used to take the respostas List and put in the Column list
+             */
+            ...respostas, //spread operator
           ],
         ),
       ), // Estrutura
