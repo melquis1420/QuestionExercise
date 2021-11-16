@@ -1,6 +1,6 @@
-# FirstClass
+# QuestionsApplication
 
-A new Flutter project.
+A basic project using Flutter.
 
 ## Getting Started
 
