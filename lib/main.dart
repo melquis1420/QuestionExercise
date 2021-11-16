@@ -2,6 +2,7 @@ import './questao.dart';
 import './resposta.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import './resultado.dart';
 
 main() => runApp(new PerguntaApp());
 
@@ -52,27 +53,22 @@ class _PerguntaAppState extends State<PerguntaApp> {
     //}
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Perguntas')),
-        body: temPerguntaSelecionada
-            ? Column(
-                children: <Widget>[
-                  //map = index and value
-                  Questao(_perguntas[_perguntaSelecionada]['texto'].toString()),
-                  /**
+          appBar: AppBar(title: Text('Perguntas')),
+          body: temPerguntaSelecionada
+              ? Column(
+                  children: <Widget>[
+                    //map = index and value
+                    Questao(
+                        _perguntas[_perguntaSelecionada]['texto'].toString()),
+                    /**
              * "..."" is used to take the respostas List and put in the Column list
              */
-                  ...respostas
-                      .map((t) => Resposta(t, _responder))
-                      .toList(), //spread operator "..."
-                ],
-              )
-            : Center(
-                child: Text(
-                  'Parabéns!',
-                  style: TextStyle(fontSize: 28),
-                ),
-              ),
-      ), // Estrutura
+                    ...respostas
+                        .map((t) => Resposta(t, _responder))
+                        .toList(), //spread operator "..."
+                  ],
+                )
+              : Resultado()), // Estrutura
     );
   }
 }
