@@ -1,5 +1,4 @@
-import './questao.dart';
-import './resposta.dart';
+import './questionario.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './resultado.dart';
@@ -8,27 +7,56 @@ main() => runApp(new PerguntaApp());
 
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
+  var _pontuacaoTotal = 0;
   final List<Map<String, Object>> _perguntas = const [
     {
       'texto': 'Qual a sua cor favorita? ', //string
-      'respostas': ['Preto', 'Branco', 'Azul', 'Amarelo'], //object
+      'respostas': [
+        {'texto': 'Preto', 'pontuacao': 10},
+        {'texto': 'Branco', 'pontuacao': 5},
+        {'texto': 'Azul', 'pontuacao': 3},
+        {'texto': 'Amarelo', 'pontuacao': 1},
+      ], //object
     },
     {
       'texto': 'Qual o seu animal favorito?',
-      'respostas': ['Dragão de comodo', 'Arara', 'Barata', 'Dinossauro']
+      'respostas': [
+        {'texto': 'Dragão de comodo', 'pontuacao': 10},
+        {'texto': 'Arara', 'pontuacao': 5},
+        {'texto': 'Barata', 'pontuacao': 1},
+        {'texto': 'Dinossauro', 'pontuacao': 8},
+      ],
     },
     {
       'texto': 'Qual o seu instrutor favorito?',
-      'respostas': ['Echo', 'Pedro', 'Thiago', 'João']
+      'respostas': [
+        {'texto': 'Melquis', 'pontuacao': 10},
+        {'texto': 'Pedro', 'pontuacao': 1},
+        {'texto': 'Thiago', 'pontuacao': 8},
+        {'texto': 'João', 'pontuacao': 3},
+      ]
     }
   ];
 
-  void _responder() {
+  /**
+   * segue para a proxima pergunta e adiciona a pontuação na variável 
+    pontução total!
+   */
+  void _responder(int pontuacao) {
     if (temPerguntaSelecionada) {
       setState(() {
         _perguntaSelecionada++;
+        _pontuacaoTotal += pontuacao;
       });
     }
+  }
+
+  //reinicializa as variáveis
+  void _reiniciarQuestionario() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _pontuacaoTotal = 0;
+    });
   }
 
   bool get temPerguntaSelecionada {
@@ -37,38 +65,21 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-    //Using MAP to convert Lists
-    /**
-         * Use "?" to check the condition.
-         * Se existe pergunta selecionada, ele execulta a ação, 
-         * caso contrário, atribui Null.
-         */
-    List<String> respostas = temPerguntaSelecionada
-        ? _perguntas[_perguntaSelecionada].cast()['respostas']
-        : [];
-
     //for (String textoResp
     //    in perguntas[_perguntaSelecionada].cast()['respostas']) {
     //  respostas.add(Resposta(textoResp, _responder));
     //}
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(title: Text('Perguntas')),
-          body: temPerguntaSelecionada
-              ? Column(
-                  children: <Widget>[
-                    //map = index and value
-                    Questao(
-                        _perguntas[_perguntaSelecionada]['texto'].toString()),
-                    /**
-             * "..."" is used to take the respostas List and put in the Column list
-             */
-                    ...respostas
-                        .map((t) => Resposta(t, _responder))
-                        .toList(), //spread operator "..."
-                  ],
-                )
-              : Resultado()), // Estrutura
+        appBar: AppBar(title: Text('Perguntas')),
+        body: temPerguntaSelecionada
+            ? Questionario(
+                perguntas: _perguntas,
+                perguntaSelecionada: _perguntaSelecionada,
+                quandoResponder: _responder,
+              )
+            : Resultado(_pontuacaoTotal, _reiniciarQuestionario),
+      ), // Estrutura
     );
   }
 }
