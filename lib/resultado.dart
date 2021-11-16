@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//"st" + ctrl + espaço para criar a classe.
+//"st" + ctrl + espaço to create a class.
 
 class Resultado extends StatelessWidget {
   final int pontuacao;

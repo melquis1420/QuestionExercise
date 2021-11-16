@@ -4,9 +4,7 @@ class Resposta extends StatelessWidget {
   final String texto;
   final void Function() onSelected;
 
-  /**
-   * Funções que deverão ser passadas como parâmetro.
-   */
+  //Functions that must be passed as a parameter
   Resposta(this.texto, this.onSelected);
 
   @override
@@ -16,7 +14,7 @@ class Resposta extends StatelessWidget {
       child: RaisedButton(
         textColor: Colors.white,
         color: Colors.blue,
-        child: Text(texto), //vai retornar um texto como parametro
+        child: Text(texto), //return text with parameter
         onPressed: onSelected,
       ),
     );

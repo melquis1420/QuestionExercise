@@ -24,8 +24,8 @@ class Questionario extends StatelessWidget {
     //Using MAP to convert Lists
     /**
          * Use "?" to check the condition.
-         * Se existe pergunta selecionada, ele execulta a ação, 
-         * caso contrário, atribui Null.
+         * If there is selected question, 
+         * it performs the action, otherwise, it assigns Null.
          */
     List<Map<String, Object>> respostas = temPerguntaSelecionada
         ? perguntas[perguntaSelecionada].cast()['respostas']

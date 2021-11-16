@@ -9,8 +9,8 @@ class Questao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /**
-     * colocou em um container para poder 
-     * aplicar a largura do texto e centraliza-lo
+     * placed in a container to be able to apply 
+     * the width of the text and center it
      */
     return Container(
       width: double.infinity, //largura- valor máximo do double

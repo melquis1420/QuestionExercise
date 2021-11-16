@@ -39,8 +39,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
   ];
 
   /**
-   * segue para a proxima pergunta e adiciona a pontuação na variável 
-    pontução total!
+   * go to next question and add pontuation in 
+   * the variable "pontuacaoTotal"
    */
   void _responder(int pontuacao) {
     if (temPerguntaSelecionada) {
@@ -51,7 +51,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
     }
   }
 
-  //reinicializa as variáveis
+  //reset
   void _reiniciarQuestionario() {
     setState(() {
       _perguntaSelecionada = 0;
@@ -65,10 +65,13 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-    //for (String textoResp
-    //    in perguntas[_perguntaSelecionada].cast()['respostas']) {
-    //  respostas.add(Resposta(textoResp, _responder));
-    //}
+    /**
+     * Another way to do:
+     * for (String textoResp in perguntas[_perguntaSelecionada].cast()['respostas']) 
+     * {
+        respostas.add(Resposta(textoResp, _responder));
+        }
+     */
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Perguntas')),
